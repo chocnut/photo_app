@@ -1,57 +1,60 @@
 import type { NextPage } from "next";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import styles from "../styles/Home.module.css";
+import { useQuery } from "react-query";
 import { PhotoList } from "./components/PhotoList";
 import { Search } from "./components/Search";
-import { BASE_CURATED_URL, BASE_SEARCH_URL } from "./constants";
-import { fetchPexelApi } from "./api";
+// import { BASE_CURATED_URL, BASE_SEARCH_URL } from "./constants";
+import { fetchCuratedPhotos, searchPhotos } from "./api";
 
-const Home: NextPage = ({ data }) => {
-  const [prevPageUrl, setPrevPageUrl] = useState(data.prev_page);
-  const [nextPageUrl, setNextPageUrl] = useState(data.next_page);
-  const [photos, setPhotos] = useState(data.photos);
+const Home: NextPage = (props) => {
+  const [page, setPage] = useState(props.data.page);
   const [searchValue, setSearchValue] = useState("");
 
-  const handlePaginate = async (e, pageUrl) => {
-    e.preventDefault();
+  const getQueryFn = (page) => {
+    if (searchValue.length > 0) {
+      return searchPhotos(searchValue, page);
+    }
 
-    const { pexelData } = await fetchPexelApi(pageUrl);
-
-    setPhotos(pexelData.photos);
-    setNextPageUrl(pexelData.next_page);
-    setPrevPageUrl(pexelData.prev_page);
+    return fetchCuratedPhotos(page);
   };
 
-  const handleSearch = useCallback(async () => {
-    if (!searchValue.length) return;
-
-    const url = `${BASE_SEARCH_URL}?query=${searchValue}&per_page=10`;
-
-    const { pexelData } = await fetchPexelApi(url);
-    setPhotos(pexelData.photos);
-    setNextPageUrl(pexelData.next_page);
-    setPrevPageUrl(pexelData.prev_page);
-  }, [searchValue]);
+  const {
+    refetch,
+    isLoading,
+    data: { data },
+    isPreviousData,
+  } = useQuery(["photos", page], () => getQueryFn(page), {
+    initialData: props,
+    keepPreviousData: true,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <main>
       <div className={styles.container}>
         <Search
-          onSearch={handleSearch}
+          refetch={refetch}
           onSetValue={setSearchValue}
           value={searchValue}
         />
-        <PhotoList photos={photos} />
+        <PhotoList photos={data.photos} />
         <div className={styles.pagination}>
           <button
-            onClick={(e) => handlePaginate(e, prevPageUrl)}
+            onClick={() => setPage((old) => Math.max(old - 1, 0))}
             title="Previous Page"
-            disabled={!prevPageUrl?.length}
+            disabled={page === 0}
           >
             ❮ &nbsp;
           </button>
           <button
-            onClick={(e) => handlePaginate(e, nextPageUrl)}
+            onClick={() => {
+              if (!isPreviousData && data.next_page) {
+                setPage((old) => old + 1);
+              }
+            }}
+            disabled={isLoading || isPreviousData || !data?.next_page}
             title="Next Page"
           >
             &nbsp; ❯
@@ -63,10 +66,11 @@ const Home: NextPage = ({ data }) => {
 };
 
 export async function getServerSideProps() {
-  const url = `${BASE_CURATED_URL}?per_page=10`;
-  const { pexelData } = await fetchPexelApi(url);
+  const { data } = await fetchCuratedPhotos();
 
-  return { props: { data: pexelData } };
+  return {
+    props: { data },
+  };
 }
 
 export default Home;

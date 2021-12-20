@@ -1,9 +1,9 @@
 import styles from "../../../styles/Home.module.css";
 
-const Search = ({ onSearch, onSetValue, value }) => {
+const Search = ({ refetch, onSetValue, value }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch();
+    refetch();
   };
 
   return (
