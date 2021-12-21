@@ -28,17 +28,16 @@ const HomePage = ({ photoData }: Props) => {
     return fetchCuratedPhotos(page);
   };
 
-  const {
-    refetch,
-    isLoading,
-    data: { data },
-    isPreviousData,
-  } = useQuery(["photos", page], () => getQueryFn(page), {
-    initialData: photoData,
-    keepPreviousData: true,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-  });
+  const { refetch, isLoading, data, isPreviousData } = useQuery(
+    ["photos", page],
+    () => getQueryFn(page),
+    {
+      initialData: photoData,
+      keepPreviousData: true,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   return (
     <div className={styles.container}>
@@ -47,13 +46,13 @@ const HomePage = ({ photoData }: Props) => {
         onSetValue={setSearchValue}
         value={searchValue}
       />
-      <PhotoList photos={data.photos} />
+      <PhotoList photos={data?.data.photos} />
       <Paginator
         onSetPage={setPage}
         currentPage={page}
         isPreviousData={isPreviousData}
         isLoading={isLoading}
-        nextPage={data?.next_page}
+        nextPage={data?.data?.next_page}
       />
     </div>
   );
