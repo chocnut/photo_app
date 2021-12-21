@@ -6,6 +6,7 @@ type Props = {
   isPreviousData: boolean;
   isLoading: boolean;
   nextPage: string;
+  prevPage: string;
 };
 
 const Paginator = ({
@@ -14,6 +15,7 @@ const Paginator = ({
   isPreviousData,
   isLoading,
   nextPage,
+  prevPage,
 }: Props) => {
   const handlePrevPage = () => {
     const page = Math.max(currentPage - 1, 0);
@@ -33,7 +35,7 @@ const Paginator = ({
         data-testid="prev"
         onClick={handlePrevPage}
         title="Previous Page"
-        disabled={currentPage === 0}
+        disabled={!prevPage}
       >
         ❮ &nbsp;
       </button>

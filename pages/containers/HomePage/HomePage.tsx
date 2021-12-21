@@ -45,6 +45,7 @@ const HomePage = ({ photoData }: Props) => {
         isPreviousData={isPreviousData}
         isLoading={isLoading}
         nextPage={data?.data?.next_page}
+        prevPage={data?.data?.prev_page}
       />
     </div>
   );
