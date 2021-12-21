@@ -30,3 +30,7 @@
 - React Query (To handle fetching, pre-fetching and data )
 - Jest (unit testing)
 - Cypress (e2e)
+
+## Caveat
+
+- While developing i encounter a rate limit of 200 request per hour. So to fix this issue I've added cypress test to record the API response and test from there.
