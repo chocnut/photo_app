@@ -1,6 +1,4 @@
-const { context } = require("msw");
-
-describe("Home", () => {
+describe("Home Page", () => {
   beforeEach(() => {
     cy.intercept("GET", "https://api.pexels.com/v1/curated?**", {
       fixture: "curated.json",
