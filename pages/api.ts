@@ -12,8 +12,10 @@ export const queryPexelApi = async ({
     url = `${BASE_SEARCH_URL}?query=${searchValue}&per_page=10&page=${page}`;
   }
 
+  const apiKey = PEXEL_API_KEY || "";
+
   const requestHeaders: HeadersInit = new Headers();
-  requestHeaders.set("Authorization", PEXEL_API_KEY);
+  requestHeaders.set("Authorization", apiKey);
 
   try {
     const response = await fetch(url, {
