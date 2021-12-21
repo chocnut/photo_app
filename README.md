@@ -33,4 +33,4 @@
 
 ## Caveat
 
-- While developing i encounter a rate limit of 200 request per hour. So to fix this issue I've added cypress test to record the API response and test from there.
+- While developing I encounter a rate limit of 200 requests per hour. So to fix this issue I've added a cypress test to record the API response and test from there.
