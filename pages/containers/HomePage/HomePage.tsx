@@ -46,6 +46,7 @@ const HomePage = ({ photoData }: Props) => {
         isLoading={isLoading}
         nextPage={data?.data?.next_page}
         prevPage={data?.data?.prev_page}
+        isEmpty={data?.data.photos.length === 0}
       />
     </div>
   );

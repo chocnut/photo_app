@@ -9,9 +9,13 @@ type Props = {
 const PhotoList = ({ photos }: Props) => {
   return (
     <div className={styles.gallery}>
-      {photos?.map((photo: Photo) => (
-        <PhotoCard key={photo.id} photo={photo} />
-      ))}
+      {photos.length > 0 ? (
+        photos?.map((photo: Photo) => (
+          <PhotoCard key={photo.id} photo={photo} />
+        ))
+      ) : (
+        <span className={styles.noResult}>No Photos Found!</span>
+      )}
     </div>
   );
 };

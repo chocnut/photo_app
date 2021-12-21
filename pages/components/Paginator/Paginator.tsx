@@ -7,6 +7,7 @@ type Props = {
   isLoading: boolean;
   nextPage: string;
   prevPage: string;
+  isEmpty: boolean;
 };
 
 const Paginator = ({
@@ -16,6 +17,7 @@ const Paginator = ({
   isLoading,
   nextPage,
   prevPage,
+  isEmpty,
 }: Props) => {
   const handlePrevPage = () => {
     const page = Math.max(currentPage - 1, 0);
@@ -28,6 +30,10 @@ const Paginator = ({
       onSetPage(page);
     }
   };
+
+  if (isEmpty) {
+    return null;
+  }
 
   return (
     <div className={styles.pagination}>
