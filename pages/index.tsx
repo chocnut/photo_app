@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { PexelData } from "../types";
-import { fetchCuratedPhotos } from "./api";
+import { queryPexelApi } from "./api";
 
 import HomePage from "./containers/HomePage/HomePage";
 
@@ -17,7 +17,10 @@ const Home: NextPage<Props> = (props) => {
 };
 
 export async function getServerSideProps() {
-  const { data } = await fetchCuratedPhotos();
+  // Pass similar object QueryKeys from react-query
+  const { data } = await queryPexelApi({
+    queryKey: [null, { page: 1, searchValue: undefined }],
+  });
 
   return {
     props: { data },

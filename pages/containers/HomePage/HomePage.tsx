@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useQuery } from "react-query";
 
-import { fetchCuratedPhotos, searchPhotos } from "../../api";
+import { queryPexelApi } from "../../api";
 import { PexelData } from "../../../types";
 
 import styles from "../../../styles/Home.module.css";
@@ -20,17 +20,9 @@ const HomePage = ({ photoData }: Props) => {
   const [page, setPage] = useState(photoData.data.page);
   const [searchValue, setSearchValue] = useState("");
 
-  const getQueryFn = (page: number) => {
-    if (searchValue.length > 0) {
-      return searchPhotos(searchValue, page);
-    }
-
-    return fetchCuratedPhotos(page);
-  };
-
-  const { refetch, isLoading, data, isPreviousData } = useQuery(
-    ["photos", page],
-    () => getQueryFn(page),
+  const { isLoading, data, isPreviousData } = useQuery(
+    ["photos", { page, searchValue }],
+    queryPexelApi,
     {
       initialData: photoData,
       keepPreviousData: true,
@@ -39,13 +31,13 @@ const HomePage = ({ photoData }: Props) => {
     }
   );
 
+  const handleSearch = (searchValue: string) => {
+    setSearchValue(searchValue);
+  };
+
   return (
     <div className={styles.container}>
-      <Search
-        refetch={refetch}
-        onSetValue={setSearchValue}
-        value={searchValue}
-      />
+      <Search onSearch={handleSearch} />
       <PhotoList photos={data?.data.photos} />
       <Paginator
         onSetPage={setPage}

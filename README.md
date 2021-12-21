@@ -31,6 +31,12 @@
 - Jest (unit testing)
 - Cypress (e2e)
 
-## Caveat
+## FAQ
+
+#### Why sometimes the API response is slow?
 
 - While developing I encounter a rate limit of 200 requests per hour. So to fix this issue I've added a cypress test to record the API response and test from there.
+
+#### Why there no page loader?
+
+- I would love to add if time allows.

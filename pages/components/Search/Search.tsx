@@ -1,15 +1,17 @@
+import { useState } from "react";
 import { UseQueryResult } from "react-query/types/react/types";
 import styles from "../../../styles/Home.module.css";
 
 type Props = {
-  refetch: () => Promise<UseQueryResult>;
-  onSetValue: (value: string) => void;
-  value: string;
+  onSearch: (value: string) => void;
 };
-const Search = ({ refetch, onSetValue, value }: Props) => {
-  const handleSubmit = (e) => {
+
+const Search = ({ onSearch }: Props) => {
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    refetch();
+    onSearch(searchValue);
   };
 
   return (
@@ -19,8 +21,8 @@ const Search = ({ refetch, onSetValue, value }: Props) => {
           type="text"
           className={styles.searchBox}
           placeholder="Search For a Photo.."
-          onChange={(e) => onSetValue(e.target.value)}
-          value={value}
+          onChange={(e) => setSearchValue(e.target.value)}
+          value={searchValue}
         />
         <button type="submit" className={styles.searchButton}>
           Go
