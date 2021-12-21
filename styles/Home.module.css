@@ -25,6 +25,36 @@
   object-fit: cover;
 }
 
+.galleryItem:hover .galleryItemInfo,
+.galleryItem:focus .galleryItemInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.galleryItemInfo {
+  display: none;
+}
+
+.galleryItemInfo li {
+  list-style-type: none;
+}
+
+.galleryItemPhotographer {
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+.galleryItemPhotographerUrl {
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+
 @supports (display: grid) {
   .gallery {
     display: grid;

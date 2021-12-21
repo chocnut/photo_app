@@ -4,10 +4,14 @@ import styles from "../styles/Home.module.css";
 import { useQuery } from "react-query";
 import { PhotoList } from "./components/PhotoList";
 import { Search } from "./components/Search";
-// import { BASE_CURATED_URL, BASE_SEARCH_URL } from "./constants";
 import { fetchCuratedPhotos, searchPhotos } from "./api";
+import { PexelData } from "../types";
 
-const Home: NextPage = (props) => {
+type Props = {
+  data: PexelData;
+};
+
+const Home: NextPage<Props> = (props) => {
   const [page, setPage] = useState(props.data.page);
   const [searchValue, setSearchValue] = useState("");
 
@@ -42,6 +46,7 @@ const Home: NextPage = (props) => {
         <PhotoList photos={data.photos} />
         <div className={styles.pagination}>
           <button
+            data-testid="prev"
             onClick={() => setPage((old) => Math.max(old - 1, 0))}
             title="Previous Page"
             disabled={page === 0}
@@ -49,6 +54,7 @@ const Home: NextPage = (props) => {
             ❮ &nbsp;
           </button>
           <button
+            data-testid="next"
             onClick={() => {
               if (!isPreviousData && data.next_page) {
                 setPage((old) => old + 1);
