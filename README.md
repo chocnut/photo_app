@@ -2,6 +2,8 @@
 
 ## How to run the project?
 
+- Please copy and rename the .env.example to .env.local
+
 ```
 - npm run dev
 ```
@@ -24,7 +26,3 @@
 - React Query (To handle fetching, pre-fetching and data )
 - Jest (unit testing)
 - Cypress (e2e)
-
-## Notes:
-
-- I've attached the .env.local values here for testing purposes
