@@ -1,8 +1,12 @@
 # Photo App
 
-## How to run the project?
+## Requirements
 
+- nodejs
+- npm
 - Please copy and rename the .env.example to .env.local
+
+## How to run the project?
 
 ```
 - npm run dev
