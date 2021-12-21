@@ -1,10 +1,6 @@
 import { BASE_CURATED_URL, BASE_SEARCH_URL, PEXEL_API_KEY } from "./constants";
 
-export const queryPexelApi = async ({
-  queryKey,
-}: {
-  queryKey: [Record<string, unknown>, { page: string; searchValue: string }];
-}) => {
+export const queryPexelApi = async ({ queryKey }: { queryKey: unknown }) => {
   const [_key, { page, searchValue }] = queryKey;
   let url = `${BASE_CURATED_URL}?per_page=10&page=${page}`;
 
