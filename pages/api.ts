@@ -20,7 +20,7 @@ export const fetchCuratedPhotos = async (page = 1) => {
   }
 };
 
-export const searchPhotos = async (query, page = 1) => {
+export const searchPhotos = async (query: string, page = 1) => {
   const url = `${BASE_SEARCH_URL}?query=${query}&per_page=10&page=${page}`;
 
   try {
