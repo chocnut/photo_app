@@ -1,7 +1,8 @@
-import styles from "../../../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
+
 import Image from "next/image";
 
-import { Photo } from "../../../types";
+import { Photo } from "../../types";
 
 type Props = {
   photo: Photo;

@@ -1,6 +1,6 @@
-import styles from "../../../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import { PhotoCard } from "../PhotoCard";
-import { Photo } from "../../../types";
+import { Photo } from "../../types";
 
 type Props = {
   photos: Photo[];

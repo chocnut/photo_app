@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import { PexelData } from "../types";
-import { queryPexelApi } from "./api";
+import { queryPexelApi } from "../utils/api";
 
-import HomePage from "./containers/HomePage/HomePage";
+import HomePage from "../containers/HomePage/HomePage";
 
 type Props = {
   data: PexelData;

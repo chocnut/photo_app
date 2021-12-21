@@ -1,10 +1,10 @@
 import { useCallback, useState } from "react";
 import { useQuery } from "react-query";
 
-import { queryPexelApi } from "../../api";
-import { PexelData } from "../../../types";
+import { queryPexelApi } from "../../utils/api";
+import { PexelData } from "../../types";
 
-import styles from "../../../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 
 import { PhotoList } from "../../components/PhotoList";
 import { Search } from "../../components/Search";

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { UseQueryResult } from "react-query/types/react/types";
-import styles from "../../../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 
 type Props = {
   onSearch: (value: string) => void;
