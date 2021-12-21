@@ -3,7 +3,7 @@
  */
 import React from "react";
 import Home from "../pages/index";
-import { PexelData } from "../types";
+import { PexelData } from "../src/types";
 import { renderWithClient } from "./utils";
 import pexels from "./__mocks__/pexel";
 

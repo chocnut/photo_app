@@ -1,14 +1,14 @@
 import { useCallback, useState } from "react";
 import { useQuery } from "react-query";
 
-import { queryPexelApi } from "../../utils/api";
-import { PexelData } from "../../types";
+import { queryPexelApi } from "../../src/api";
+import { PexelData } from "../../src/types";
 
 import styles from "../../styles/Home.module.css";
 
-import { PhotoList } from "../../components/PhotoList";
-import { Search } from "../../components/Search";
-import { Paginator } from "../../components/Paginator";
+import { PhotoList } from "../../src/components/PhotoList";
+import { Search } from "../../src/components/Search";
+import { Paginator } from "../../src/components/Paginator";
 
 type Props = {
   photoData: {

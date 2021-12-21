@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import { PexelData } from "../types";
-import { queryPexelApi } from "../utils/api";
+import { PexelData } from "../src/types";
+import { queryPexelApi } from "../src/api";
 
 import HomePage from "../containers/HomePage/HomePage";
 
