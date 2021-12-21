@@ -2,8 +2,8 @@
 
 ## Requirements
 
-- nodejs
-- npm
+- NodeJS
+- NPM
 - Please copy and rename the .env.example to .env.local
 
 ## How to run the project?
