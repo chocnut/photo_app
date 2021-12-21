@@ -1,6 +1,12 @@
+import { UseQueryResult } from "react-query/types/react/types";
 import styles from "../../../styles/Home.module.css";
 
-const Search = ({ refetch, onSetValue, value }) => {
+type Props = {
+  refetch: () => Promise<UseQueryResult>;
+  onSetValue: (value: string) => void;
+  value: string;
+};
+const Search = ({ refetch, onSetValue, value }: Props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     refetch();
